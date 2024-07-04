@@ -1,11 +1,11 @@
 export const defaultPlayers = [
   {
     id: 0,
-    name: 'Jess',
+    name: '🦊',
   },
   {
     id: 1,
-    name: 'Seb',
+    name: '🐱',
   },
 ];
 

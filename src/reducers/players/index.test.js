@@ -10,17 +10,17 @@ describe('player reducers', () => {
   });
 
   it('should handle PLAYER_ADD', () => {
-    expect(players([], actions.playerAdd())).toEqual([{ id: 0, name: 'Bro' }]);
+    expect(players([], actions.playerAdd())).toEqual([{ id: 0, name: '🦊' }]);
     expect(players(initialState, actions.playerAdd())).toEqual([
       ...initialState,
-      { id: 2, name: 'Bro' },
+      { id: 2, name: '🦊' },
     ]);
   });
 
   it('should handle PLAYER_UPDATE', () => {
     expect(players(initialState, actions.playerUpdate(1, 'Bro'))).toEqual([
-      { id: 0, name: 'Jess' },
-      { id: 1, name: 'Bro' },
+      { id: 0, name: '🐱' },
+      { id: 1, name: '🦊' },
     ]);
   });
 });

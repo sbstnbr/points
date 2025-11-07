@@ -11,6 +11,15 @@ const WistRoundResult = ({
 }) => {
   const longPressProps = useLongPress(() => handleDecreaseFold(), 500);
   
+  const handleClick = (e) => {
+    // Call the long press onClick first to check if long press was triggered
+    longPressProps.onClick(e);
+    // If event wasn't prevented by long press, handle the normal click
+    if (!e.defaultPrevented) {
+      handleIncreaseFold();
+    }
+  };
+  
   return (
     <Grid
       item
@@ -24,11 +33,17 @@ const WistRoundResult = ({
       <Badge color={getBadgeColor(points)} badgeContent={folds} showZero>
         <Button
           variant="contained"
-          onClick={handleIncreaseFold}
+          onClick={handleClick}
           onContextMenu={(e) => {
             e.preventDefault();
           }}
-          {...longPressProps}
+          onMouseDown={longPressProps.onMouseDown}
+          onMouseUp={longPressProps.onMouseUp}
+          onMouseLeave={longPressProps.onMouseLeave}
+          onTouchStart={longPressProps.onTouchStart}
+          onTouchEnd={longPressProps.onTouchEnd}
+          onTouchMove={longPressProps.onTouchMove}
+          onTouchCancel={longPressProps.onTouchCancel}
         >
           {points || '-'}
         </Button>

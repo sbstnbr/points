@@ -10,7 +10,7 @@ PWA written with React to count points in card games
 
 # Todo
 
-- [ ] Fix bug long press desktop + ios
+- [x] Fix bug long press desktop + ios
 
 - [ ] Add authentication https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
 

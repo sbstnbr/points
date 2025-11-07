@@ -10,6 +10,15 @@ import useLongPress from '../../hooks/useLongPress';
 const PlayerScore = ({ score, playerId, roundId, handleAddPoint, handleResetRound, playerIdToServe }) => {
   const longPressProps = useLongPress(() => handleResetRound(roundId, playerId), 500);
   
+  const handleClick = (e) => {
+    // Call the long press onClick first to check if long press was triggered
+    longPressProps.onClick(e);
+    // If event wasn't prevented by long press, handle the normal click
+    if (!e.defaultPrevented) {
+      handleAddPoint(roundId, playerId);
+    }
+  };
+  
   return (
     <Grid
       item
@@ -23,11 +32,17 @@ const PlayerScore = ({ score, playerId, roundId, handleAddPoint, handleResetRoun
       <Badge variant="dot" invisible={playerId !== playerIdToServe} color="primary">
         <Button
           variant="contained"
-          onClick={() => handleAddPoint(roundId, playerId)}
+          onClick={handleClick}
           onContextMenu={(e) => {
             e.preventDefault();
           }}
-          {...longPressProps}
+          onMouseDown={longPressProps.onMouseDown}
+          onMouseUp={longPressProps.onMouseUp}
+          onMouseLeave={longPressProps.onMouseLeave}
+          onTouchStart={longPressProps.onTouchStart}
+          onTouchEnd={longPressProps.onTouchEnd}
+          onTouchMove={longPressProps.onTouchMove}
+          onTouchCancel={longPressProps.onTouchCancel}
         >
           {score}
         </Button>

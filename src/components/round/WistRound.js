@@ -1,40 +1,37 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
-import Collapse from '@material-ui/core/Collapse';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepButton from '@mui/material/StepButton';
+import Collapse from '@mui/material/Collapse';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import classnames from 'classnames';
 import Round from './Round';
 
-const styles = theme => ({
-  expand: {
-    transform: 'rotate(0deg)',
-    margin: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-    padding: '0 0 6px 0',
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  actions: {
-    padding: '0px',
-  },
+const StyledIconButton = styled(IconButton, {
+  shouldForwardProp: (prop) => prop !== 'expanded',
+})(({ theme, expanded }) => ({
+  transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
+  margin: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+  padding: '0 0 6px 0',
+}));
+
+const StyledCardActions = styled(CardActions)({
+  padding: '0px',
 });
 
 const getSteps = () => ['Bid', 'Result'];
 
 const WistRound = ({
-  classes, activeStep, handleSwitchActiveStep, children,
+  activeStep, handleSwitchActiveStep, children,
 }) => {
-  // const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const steps = getSteps();
@@ -46,22 +43,20 @@ const WistRound = ({
   return (
     <Round>
       <CardContent>
-        <Grid container spacing={16} justify="space-evenly">
+        <Grid container spacing={2} justifyContent="space-evenly">
           {children}
         </Grid>
       </CardContent>
-      <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton
-          className={classnames(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
+      <StyledCardActions disableSpacing>
+        <StyledIconButton
+          expanded={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="Show more"
         >
           <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
+        </StyledIconButton>
+      </StyledCardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Stepper nonLinear activeStep={activeStep} alternativeLabel>
           {steps.map((label, index) => (
@@ -75,4 +70,4 @@ const WistRound = ({
   );
 };
 
-export default withStyles(styles)(WistRound);
+export default WistRound;

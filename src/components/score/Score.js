@@ -1,21 +1,19 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
-const styles = theme => ({
-  avatar: {
-    backgroundColor: theme.palette.primary.dark,
-  },
-});
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.dark,
+}));
 
 class Score extends React.Component {
   constructor(props) {
@@ -47,14 +45,16 @@ class Score extends React.Component {
   };
 
   render() {
-    const { classes, player, points } = this.props;
+    const { player, points } = this.props;
     const { open } = this.state;
+    // Properly extract first character (handles emojis correctly)
+    const firstChar = Array.from(player.name)[0] || player.name;
     return (
       <Grid item xs={3} sm={2} md={1}>
         <Grid container direction="column" alignItems="center">
-          <Avatar className={classes.avatar} onClick={this.handleClickOpen}>
-            {player.name.split('')[0]}
-          </Avatar>
+          <StyledAvatar onClick={this.handleClickOpen}>
+            {firstChar}
+          </StyledAvatar>
           <Typography variant="body1">{points}</Typography>
           <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Update player name</DialogTitle>
@@ -84,7 +84,6 @@ class Score extends React.Component {
 }
 
 Score.propTypes = {
-  classes: PropTypes.shape({ avatar: PropTypes.string.isRequired }).isRequired,
   player: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -93,4 +92,4 @@ Score.propTypes = {
   handleUpdatePlayerName: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Score);
+export default Score;

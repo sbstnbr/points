@@ -1,21 +1,20 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Badge from '@material-ui/core/Badge';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
 import useLongPress from '../../hooks/useLongPress';
 
-const getBadgeColor = points => (points < 0 ? 'secondary' : 'primary');
+const getBadgeColor = (points) => (points < 0 ? 'secondary' : 'primary');
 
 const WistRoundResult = ({
   playerId, handleIncreaseFold, handleDecreaseFold, folds, points,
 }) => {
-  const scoreLongPress = playerId => useLongPress(() => handleDecreaseFold(playerId), 500);
+  const longPressProps = useLongPress(() => handleDecreaseFold(), 500);
+  
   return (
     <Grid
       item
       container
-      key={playerId}
-      // className={classes.result}
       xs={3}
       sm={2}
       md={1}
@@ -25,12 +24,11 @@ const WistRoundResult = ({
       <Badge color={getBadgeColor(points)} badgeContent={folds} showZero>
         <Button
           variant="contained"
-          onClick={() => handleIncreaseFold(playerId)}
+          onClick={handleIncreaseFold}
           onContextMenu={(e) => {
             e.preventDefault();
-            // return handleDecreaseFold(playerId);
           }}
-          {...scoreLongPress(playerId)}
+          {...longPressProps}
         >
           {points || '-'}
         </Button>

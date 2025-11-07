@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -27,12 +27,12 @@ class SignUpFormBase extends Component {
 
   onSubmit = (event) => {
     const { username, email, passwordOne } = this.state;
-    const { firebase, history } = this.props;
+    const { firebase, navigate } = this.props;
     firebase
       .doCreateUserWithEmailAndPassword()
       .then((authUser) => {
         this.setState({ ...INITIAL_STATE });
-        history.push(ROUTES.HOME);
+        navigate(ROUTES.HOME);
       })
       .catch((error) => {
         this.setState({ error });
@@ -87,6 +87,12 @@ class SignUpFormBase extends Component {
   }
 }
 
-const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+// Wrapper component to provide navigate hook to class component
+const SignUpFormWithNavigate = (props) => {
+  const navigate = useNavigate();
+  return <SignUpFormBase {...props} navigate={navigate} />;
+};
+
+const SignUpForm = withFirebase(SignUpFormWithNavigate);
 
 export default SignUpPage;

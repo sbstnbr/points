@@ -1,11 +1,12 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import"],
+  "extends": ["react-app", "react-app/jest"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/no-array-index-key": 1,
-    "react/prop-types": 1
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   },
   "env": {
     "browser": true,

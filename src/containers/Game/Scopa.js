@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import Game from '../../components/Game/Game';
-import ScopaRound from '../../components/Round/ScopaRound';
+import ScopaRound from '../../components/round/ScopaRound';
 import { scopa } from '../../reducers';
 import * as actions from '../../actions';
 import { scopaInitialState } from '../../constants/defaultValues';

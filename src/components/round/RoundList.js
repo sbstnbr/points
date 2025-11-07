@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = () => ({});
+import Grid from '@mui/material/Grid';
 
 const RoundList = ({ children }) => (
-  <Grid item container direction="column" alignItems="center" spacing={16}>
+  <Grid item container direction="column" alignItems="center" spacing={2}>
     {children}
   </Grid>
 );
@@ -15,4 +12,4 @@ RoundList.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default withStyles(styles)(RoundList);
+export default RoundList;

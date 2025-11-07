@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import Game from '../../components/Game/Game';
-import WistRound from '../../components/Round/WistRound';
-import WistRoundResult from '../../components/Round/WistRoundResult';
+import WistRound from '../../components/round/WistRound';
+import WistRoundResult from '../../components/round/WistRoundResult';
 import { wistInitialState } from '../../constants/defaultValues';
 import * as actions from '../../actions';
 import { wist } from '../../reducers';

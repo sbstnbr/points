@@ -1,7 +1,7 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Add from '@material-ui/icons/Add';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Add from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
 import Score from './Score';
 
@@ -27,7 +27,7 @@ function ScoreList({
     </IconButton>
   ) : null;
   return (
-    <Grid item xs={12} container justify="space-evenly">
+    <Grid item xs={12} container justifyContent="space-evenly">
       {Players}
       {addPlayerButton}
     </Grid>

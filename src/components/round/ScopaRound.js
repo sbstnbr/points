@@ -1,48 +1,58 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Badge from '@material-ui/core/Badge';
-import CardContent from '@material-ui/core/CardContent';
-import { withStyles } from '@material-ui/core';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Badge from '@mui/material/Badge';
+import CardContent from '@mui/material/CardContent';
 import PropTypes from 'prop-types';
 import Round from './Round';
 import useLongPress from '../../hooks/useLongPress';
 
-const styles = {};
+const PlayerScore = ({ score, playerId, roundId, handleAddPoint, handleResetRound, playerIdToServe }) => {
+  const longPressProps = useLongPress(() => handleResetRound(roundId, playerId), 500);
+  
+  return (
+    <Grid
+      item
+      container
+      xs={3}
+      sm={2}
+      md={1}
+      alignItems="center"
+      direction="column"
+    >
+      <Badge variant="dot" invisible={playerId !== playerIdToServe} color="primary">
+        <Button
+          variant="contained"
+          onClick={() => handleAddPoint(roundId, playerId)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+          {...longPressProps}
+        >
+          {score}
+        </Button>
+      </Badge>
+    </Grid>
+  );
+};
 
 const ScopaRound = ({
   result, id, handleAddPoint, handleResetRound, playerIdToServe,
 }) => {
-  const scoreLongPress = (id, playerId) => useLongPress(() => handleResetRound(id, playerId), 500);
   return (
     <Round>
       <CardContent>
-        <Grid container spacing={16} justify="space-evenly">
+        <Grid container spacing={2} justifyContent="space-evenly">
           {result.map((score, playerId) => (
-            <Grid
-              item
-              container
+            <PlayerScore
               key={playerId}
-              xs={3}
-              sm={2}
-              md={1}
-              alignItems="center"
-              direction="column"
-            >
-              <Badge variant="dot" invisible={playerId !== playerIdToServe} color="primary">
-                <Button
-                  variant="contained"
-                  onClick={() => handleAddPoint(id, playerId)}
-                  onContextMenu={(e) => {
-                    e.preventDefault();
-                    // return handleResetRound(id, playerId);
-                  }}
-                  {...scoreLongPress(id, playerId)}
-                >
-                  {score}
-                </Button>
-              </Badge>
-            </Grid>
+              score={score}
+              playerId={playerId}
+              roundId={id}
+              handleAddPoint={handleAddPoint}
+              handleResetRound={handleResetRound}
+              playerIdToServe={playerIdToServe}
+            />
           ))}
         </Grid>
       </CardContent>
@@ -57,4 +67,4 @@ ScopaRound.propTypes = {
   handleResetRound: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(ScopaRound);
+export default ScopaRound;

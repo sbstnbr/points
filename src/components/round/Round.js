@@ -1,27 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import { withStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import { styled } from '@mui/material/styles';
 
-const styles = {
-  result: {
-    // justify: 'center',
-  },
-  round: {
-    width: '100%',
-  },
-};
+const StyledGrid = styled(Grid)({
+  width: '100%',
+});
 
-const Round = ({ classes, children }) => (
-  <Grid item xs={12} className={classes.round}>
+const Round = ({ children }) => (
+  <StyledGrid item xs={12}>
     <Card elevation={10}>{children}</Card>
-  </Grid>
+  </StyledGrid>
 );
 
 Round.propTypes = {
-  classes: PropTypes.shape({ result: PropTypes.string.isRequired }).isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export default withStyles(styles)(Round);
+export default Round;

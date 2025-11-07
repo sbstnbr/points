@@ -1,26 +1,25 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
-import { withStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import RoundList from '../Round/RoundList';
-import ScoreList from '../Score/ScoreList';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import RoundList from '../round/RoundList';
+import ScoreList from '../score/ScoreList';
 import GameBar from './GameBar';
 import GameDrawer from './GameDrawer';
 
-const styles = theme => ({
-  parent: {
-    padding: '20px',
-  },
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
-  },
-});
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  padding: '20px',
+}));
+
+const StyledFab = styled(Fab)(({ theme }) => ({
+  position: 'fixed',
+  bottom: theme.spacing(2),
+  right: theme.spacing(2),
+}));
 
 class Game extends React.Component {
   constructor(props) {
@@ -39,7 +38,6 @@ class Game extends React.Component {
   render() {
     const { open } = this.state;
     const {
-      classes,
       gameType,
       allowAddPlayer,
       children,
@@ -54,7 +52,7 @@ class Game extends React.Component {
       <div>
         <GameBar gameType={gameType} toggleDrawer={this.toggleDrawer} />
         <GameDrawer toggleDrawer={this.toggleDrawer} open={open} />
-        <Grid container spacing={16} alignItems="center" className={classes.parent}>
+        <StyledGrid container spacing={2} alignItems="center">
           <ScoreList
             rounds={rounds}
             players={players}
@@ -64,10 +62,10 @@ class Game extends React.Component {
             calculateTotalPoints={calculateTotalPoints}
           />
           <RoundList>{children}</RoundList>
-          <Fab onClick={createRound} color="secondary" className={classes.fab}>
+          <StyledFab onClick={createRound} color="secondary">
             <AddIcon />
-          </Fab>
-        </Grid>
+          </StyledFab>
+        </StyledGrid>
       </div>
     );
   }
@@ -80,4 +78,4 @@ Game.defaultProps = {
   allowAddPlayer: false,
 };
 
-export default withStyles(styles)(Game);
+export default Game;

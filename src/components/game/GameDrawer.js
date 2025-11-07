@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import PollIcon from '@material-ui/icons/Poll';
-import LocalCafeIcon from '@material-ui/icons/LocalCafe';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import PollIcon from '@mui/icons-material/Poll';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 import GameAnimatedIcon from './GameAnimatedIcon';
 
-const styles = {
-  drawer: {
-    width: '250px',
-    height: '100%',
-    position: 'relative',
-  },
-  icon: {
-    width: '100%',
-    position: 'absolute',
-    bottom: '20px',
-  },
-};
+const DrawerContent = styled('div')({
+  width: '250px',
+  height: '100%',
+  position: 'relative',
+});
 
-const GameDrawer = ({ open, toggleDrawer, classes }) => {
+const IconContainer = styled('div')({
+  width: '100%',
+  position: 'absolute',
+  bottom: '20px',
+});
+
+const GameDrawer = ({ open, toggleDrawer }) => {
   const gameList = (
     <div>
       <List>
@@ -44,21 +43,20 @@ const GameDrawer = ({ open, toggleDrawer, classes }) => {
       onClose={() => toggleDrawer(false)}
       onOpen={() => toggleDrawer(true)}
     >
-      <div
+      <DrawerContent
         tabIndex={0}
         role="button"
         onClick={() => toggleDrawer(false)}
         onKeyDown={() => toggleDrawer(false)}
-        className={classes.drawer}
       >
         <Typography variant="h2">
           {' '}
           {gameList}
         </Typography>
-        <div className={classes.icon}>
+        <IconContainer>
           <GameAnimatedIcon />
-        </div>
-      </div>
+        </IconContainer>
+      </DrawerContent>
     </SwipeableDrawer>
   );
 };
@@ -68,4 +66,4 @@ GameDrawer.propTypes = {
   toggleDrawer: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(GameDrawer);
+export default GameDrawer;

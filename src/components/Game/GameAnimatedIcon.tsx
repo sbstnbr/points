@@ -11,6 +11,7 @@ const GameAnimatedIcon = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+  // @ts-ignore - Type conflict between react-lottie and React 18
   return <Lottie options={defaultOptions} />;
 };
 

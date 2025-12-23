@@ -34,3 +34,21 @@ export const wistRound = (id, nbPlayer = 2) => ({
   results: Array.from(Array(nbPlayer).keys()).map(playerId => wistResult(playerId)),
   activeStep: 0,
 });
+
+export const MTG_STARTING_LIFE = 20;
+
+export const mtgInitialState = {
+  players: defaultPlayers,
+  rounds: [],
+  startingLife: MTG_STARTING_LIFE,
+};
+
+export const mtgResult = (playerId, startingLife = MTG_STARTING_LIFE) => ({
+  playerId,
+  life: startingLife,
+});
+
+export const mtgRound = (id, nbPlayer = 2, startingLife = MTG_STARTING_LIFE) => ({
+  id,
+  results: Array.from(Array(nbPlayer).keys()).map(playerId => mtgResult(playerId, startingLife)),
+});

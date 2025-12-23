@@ -62,3 +62,33 @@ export const roundWistActiveStepSwitch = (roundId: number, step: number) => ({
   roundId,
   step,
 });
+
+export const roundMtgAdd = () => ({
+  type: types.ROUND_MTG_ADD,
+});
+
+export const roundMtgLifeIncrease = (roundId: number, playerId: number, amount: number = 1) => ({
+  type: types.ROUND_MTG_LIFE_INCREASE,
+  roundId,
+  playerId,
+  amount,
+});
+
+export const roundMtgLifeDecrease = (roundId: number, playerId: number, amount: number = 1) => ({
+  type: types.ROUND_MTG_LIFE_DECREASE,
+  roundId,
+  playerId,
+  amount,
+});
+
+export const roundMtgLifeSet = (roundId: number, playerId: number, life: number) => ({
+  type: types.ROUND_MTG_LIFE_SET,
+  roundId,
+  playerId,
+  life,
+});
+
+export const roundMtgReset = (roundId: number) => ({
+  type: types.ROUND_MTG_RESET,
+  roundId,
+});

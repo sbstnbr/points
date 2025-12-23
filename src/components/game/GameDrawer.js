@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PollIcon from '@mui/icons-material/Poll';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
@@ -24,14 +25,20 @@ const IconContainer = styled('div')({
   bottom: '20px',
 });
 
+const games = [
+  { name: 'Scopa', icon: <LocalCafeIcon /> },
+  { name: 'Wist', icon: <PollIcon /> },
+  { name: 'MTG', icon: <AutoAwesomeIcon /> },
+];
+
 const GameDrawer = ({ open, toggleDrawer }) => {
   const gameList = (
     <div>
       <List>
-        {['Scopa', 'Wist'].map((text, index) => (
-          <ListItem button key={text} component={Link} to={`/${text.toLowerCase()}`}>
-            <ListItemIcon>{index % 2 === 0 ? <LocalCafeIcon /> : <PollIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        {games.map((game) => (
+          <ListItem button key={game.name} component={Link} to={`/${game.name.toLowerCase()}`}>
+            <ListItemIcon>{game.icon}</ListItemIcon>
+            <ListItemText primary={game.name} />
           </ListItem>
         ))}
       </List>

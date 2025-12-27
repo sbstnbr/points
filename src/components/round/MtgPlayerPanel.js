@@ -7,6 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 
 const Panel = styled('div')(({ bgcolor, rotated }) => ({
   flex: 1,
+  minHeight: 0, // Prevent flex overflow
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -15,6 +16,7 @@ const Panel = styled('div')(({ bgcolor, rotated }) => ({
   position: 'relative',
   transform: rotated ? 'rotate(180deg)' : 'none',
   userSelect: 'none',
+  overflow: 'hidden',
 }));
 
 const PlayerIcon = styled('div')({

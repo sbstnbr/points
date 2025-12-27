@@ -11,11 +11,16 @@ const Container = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
+  height: '100dvh', // Dynamic viewport height for mobile browsers
   width: '100vw',
   overflow: 'hidden',
   position: 'fixed',
   top: 0,
   left: 0,
+  '@supports (-webkit-touch-callout: none)': {
+    // iOS Safari fallback
+    height: '-webkit-fill-available',
+  },
 });
 
 const Divider = styled('div')({

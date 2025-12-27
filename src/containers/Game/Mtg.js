@@ -10,16 +10,15 @@ const STARTING_LIFE = 20;
 const Container = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  height: '100vh',
-  height: '100dvh', // Dynamic viewport height for mobile browsers
+  // Use dvh (dynamic viewport height) with vh fallback for older browsers
+  height: 'calc(100dvh)',
   width: '100vw',
   overflow: 'hidden',
   position: 'fixed',
   top: 0,
   left: 0,
-  '@supports (-webkit-touch-callout: none)': {
-    // iOS Safari fallback
-    height: '-webkit-fill-available',
+  '@supports not (height: 100dvh)': {
+    height: '100vh',
   },
 });
 
